@@ -31,7 +31,7 @@ export default function Form() {
     formSchema.isValid(formState).then((valid) => setDisabledButton(!valid));
   }, [formState, formSchema]);
 
-  // Submit for form submitted correctly
+  // Submit for form submitted correctly to 'POST' data
   const formSubmit = (event) => {
     event.preventDefault();
     axios
@@ -60,6 +60,7 @@ export default function Form() {
     setFormErrors(name, valueTernary);
   };
 
+  // Set up return for information in formSubmit
   return (
     <form onSubmit={formSubmit}>
       <div style={{ color: "red" }}>
@@ -68,6 +69,8 @@ export default function Form() {
         <div>{errors.password}</div>
         <div>{errors.terms}</div>
       </div>
+
+      {/*Name section in form */}
       <label htmlFor="name">
         Name:
         <input
@@ -78,6 +81,7 @@ export default function Form() {
         />
         <br />
       </label>
+      {/*Email section in form */}
       <label htmlFor="email">
         Email:
         <input
@@ -88,6 +92,7 @@ export default function Form() {
         />
         <br />
       </label>
+      {/*Password section in form */}
       <label htmlFor="password">
         Password:
         <input
@@ -98,6 +103,7 @@ export default function Form() {
         />
       </label>
       <br />
+      {/*Terms section in form */}
       <label htmlFor="terms">
         Agree to Terms and Conditions:
         <input
@@ -108,6 +114,7 @@ export default function Form() {
         />
       </label>
       <br />
+      {/* Added submit button for sending form data to server  */}
       <button disabled={disableButton}>Submit</button>
     </form>
   );
