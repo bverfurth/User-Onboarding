@@ -59,4 +59,56 @@ export default function Form() {
     setFormState({ ...formState, [event.target.name]: valueTernary });
     setFormErrors(name, valueTernary);
   };
+
+  return (
+    <form onSubmit={formSubmit}>
+      <div style={{ color: "red" }}>
+        <div>{errors.name}</div>
+        <div>{errors.email}</div>
+        <div>{errors.password}</div>
+        <div>{errors.terms}</div>
+      </div>
+      <label htmlFor="name">
+        Name:
+        <input
+          type="text"
+          name="name"
+          onChange={inputChange}
+          value={formState.name}
+        />
+        <br />
+      </label>
+      <label htmlFor="email">
+        Email:
+        <input
+          type="text"
+          name="email"
+          onChange={inputChange}
+          value={formState.email}
+        />
+        <br />
+      </label>
+      <label htmlFor="password">
+        Password:
+        <input
+          type="text"
+          name="password"
+          onChange={inputChange}
+          value={formState.password}
+        />
+      </label>
+      <br />
+      <label htmlFor="terms">
+        Agree to Terms and Conditions:
+        <input
+          type="checkbox"
+          name="terms"
+          onChange={inputChange}
+          value={formState.terms}
+        />
+      </label>
+      <br />
+      <button disabled={disableButton}>Submit</button>
+    </form>
+  );
 }
