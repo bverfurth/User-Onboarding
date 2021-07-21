@@ -25,4 +25,18 @@ export default function Form() {
     password: yup.string().required("Please enter a valid password").min(6),
     terms: yup.boolean().oneOf([true], "Agree to Terms and Conditions"),
   });
+
+  // Effect for if form is filled out correctly
+  useEffect(() => {
+    formSchema.isValid(formState).then((valid) => setDisabledButton(!valid));
+  }, [formState, formSchema]);
+
+  // Submit for form submitted correctly
+  const formSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .post("https://reqres.in/api/users", formState)
+      .then(() => console.log("form submitted, success!"))
+      .catch((err) => console.log(err));
+  };
 }
