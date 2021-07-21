@@ -39,4 +39,24 @@ export default function Form() {
       .then(() => console.log("form submitted, success!"))
       .catch((err) => console.log(err));
   };
+
+  // Confirms if the information meets the standard set by the form schema
+  const setFormErrors = (name, value) => {
+    yup
+      .reach(formSchema, name)
+      .validate(value)
+      .then(() => setErrors({ ...errors, [name]: "" }))
+      .catch((err) => setErrors({ ...errors, [name]: err.errors[0] }));
+  };
+
+  // Set up for onChange function
+  const inputChange = (event) => {
+    const { name } = event.target;
+    const valueTernary =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
+    setFormState({ ...formState, [event.target.name]: valueTernary });
+    setFormErrors(name, valueTernary);
+  };
 }
